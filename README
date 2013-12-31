@@ -1,0 +1,9 @@
+Using this setup requires:
+1. Vagrant
+2. Virtual Box 4.3.4 or higher
+
+This box sets up a precise64 bit virtual machine with 2GB RAM.
+
+To run this setup on:
+1. Windows run the setup.bat file.
+2. Linux and Mac run the setup.sh file.

@@ -1,0 +1,11 @@
+.vagrant/
+
+go-recipes/cookbooks/java/
+
+go-recipes/cookbooks/git/
+go-recipes/cookbooks/mercurial/
+go-recipes/cookbooks/subversion/
+
+go-recipes/cookbooks/ruby-cookbook/
+go-recipes/cookbooks/chef-recipe-rake/
+go-recipes/cookbooks/opscode-chef-cookbook-sass/
