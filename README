@@ -4,6 +4,10 @@ Using this setup requires:
 
 This box sets up a precise64 bit virtual machine with 2GB RAM.
 
-To run this setup on:
-1. Windows run the setup.bat file.
-2. Linux and Mac run the setup.sh file.
+To run this setup in the terminal mode (Without the UI):
+1. Windows - run the setup.bat file.
+2. Linux and Mac - run the setup.sh file.
+
+To run this setup with GUI:
+1. Windows - run the setup.gui.bat file.
+2. Linux and Mac - run the setup.gui.sh file.
