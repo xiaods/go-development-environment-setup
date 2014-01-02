@@ -1,8 +1,18 @@
 ## go-setup
 
+cookbook_file "/etc/motd" do
+  source "README"
+  mode "0644"
+end
+
+cookbook_file "/home/vagrant/README" do
+  source "README"
+  mode "0644"
+end
+
 script "setup_go_code" do
   interpreter "bash"
-  user "vagrant"       
+  user "vagrant"
   cwd "/home/vagrant"
   environment("HOME" => "/home/vagrant")
   code <<-EOH

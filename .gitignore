@@ -1,11 +1,14 @@
 .vagrant/
 
-go-recipes/cookbooks/java/
+scripts/go-recipes/cookbooks/java/
 
-go-recipes/cookbooks/git/
-go-recipes/cookbooks/mercurial/
-go-recipes/cookbooks/subversion/
+scripts/go-recipes/cookbooks/git/
+scripts/go-recipes/cookbooks/mercurial/
+scripts/go-recipes/cookbooks/subversion/
 
-go-recipes/cookbooks/ruby-cookbook/
-go-recipes/cookbooks/chef-recipe-rake/
-go-recipes/cookbooks/opscode-chef-cookbook-sass/
+scripts/go-recipes/cookbooks/ruby-cookbook/
+scripts/go-recipes/cookbooks/chef-recipe-rake/
+scripts/go-recipes/cookbooks/opscode-chef-cookbook-sass/
+scripts/go-recipes/cookbooks/chef-zip/
+
+.DS_Store

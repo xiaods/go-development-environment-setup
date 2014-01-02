@@ -1,18 +1,9 @@
-#!/bin/sh
+#!/bin/bash
+set -e
 
-cd go-recipes/cookbooks
+/bin/bash scripts/shared/download-cookbooks.sh
 
-git clone https://github.com/opscode-cookbooks/git.git
-git clone https://github.com/opscode-cookbooks/subversion.git
-
-git clone http://github.com/opscode-cookbooks/java.git
-
-git clone https://github.com/jtimberman/ruby-cookbook.git
-git clone https://github.com/erniebrodeur/chef-recipe-rake.git
-git clone https://github.com/jtgraphic/opscode-chef-cookbook-sass.git
-
-cd ../..
-
-HEADLESS=true vagrant up
+HEADLESS=true TO_RUN_WITH_WINDOW_MANAGER=false vagrant up
 vagrant halt
-vagrant up --no-provision
+HEADLESS=true TO_RUN_WITH_WINDOW_MANAGER=false vagrant up --no-provision
+echo "Dropping you into the virtual machine"; vagrant ssh
