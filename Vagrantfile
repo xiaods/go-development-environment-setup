@@ -37,6 +37,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     chef.add_recipe "subversion"
 
     chef.add_recipe "java"
+    chef.add_recipe "maven"
 
     chef.add_recipe "ruby"
     chef.add_recipe "sass"
@@ -46,6 +47,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     chef.add_recipe "gnome" if ENV["TO_RUN_WITH_WINDOW_MANAGER"] == "true"
     chef.add_recipe "startup-setup" if ENV["TO_RUN_WITH_WINDOW_MANAGER"] == "true"
 
+    chef.add_recipe "startup-setup-console"
     chef.add_recipe "go-setup"
 
     chef.json = {
