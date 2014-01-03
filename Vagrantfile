@@ -19,7 +19,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.provider :virtualbox do |vb|
     vb.gui = ENV["HEADLESS"] != "true"
-    vb.customize ["modifyvm", :id, "--memory", memory_to_use]
+    vb.memory = memory_to_use
   end
 
   config.vm.provision :chef_solo do |chef|
