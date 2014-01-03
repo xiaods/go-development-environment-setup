@@ -4,7 +4,34 @@
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
 
-memory_to_use = ENV["MEMORY"] || (ENV["TO_RUN_WITH_WINDOW_MANAGER"] == "true" ? "4096" : "2048")
+class Environment
+  EnvironmentSettingsFile = ".vagrant/go"
+
+  def read variable, default = nil
+    return ENV[variable] unless ENV[variable].nil?
+    read_settings[variable] || default
+  end
+
+  def write variable, value
+    settings = read_settings
+    settings[variable] = value
+
+    File.write EnvironmentSettingsFile, settings.to_json
+  end
+
+  private
+  def read_settings
+    return {} unless File.exists? EnvironmentSettingsFile
+
+    JSON.parse File.read EnvironmentSettingsFile
+  end
+end
+
+env = Environment.new
+
+memory_to_use = env.read "MEMORY", "2048"
+env.write "MEMORY", memory_to_use
+
 puts "Will use #{memory_to_use}MB of RAM for the virtual machine."
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
@@ -18,7 +45,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # config.vm.synced_folder "../data", "/vagrant_data"
 
   config.vm.provider :virtualbox do |vb|
-    vb.gui = ENV["HEADLESS"] != "true"
+    vb.gui = env.read("HEADLESS") != "true"
     vb.memory = memory_to_use
   end
 
@@ -43,9 +70,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     chef.add_recipe "sass"
     chef.add_recipe "rake"
 
-    chef.add_recipe "intellij" if ENV["TO_RUN_WITH_WINDOW_MANAGER"] == "true"
-    chef.add_recipe "gnome" if ENV["TO_RUN_WITH_WINDOW_MANAGER"] == "true"
-    chef.add_recipe "startup-setup" if ENV["TO_RUN_WITH_WINDOW_MANAGER"] == "true"
+    chef.add_recipe "intellij" if env.read("TO_RUN_WITH_WINDOW_MANAGER") == "true"
+    chef.add_recipe "gnome" if env.read("TO_RUN_WITH_WINDOW_MANAGER") == "true"
+    chef.add_recipe "startup-setup" if env.read("TO_RUN_WITH_WINDOW_MANAGER") == "true"
 
     chef.add_recipe "startup-setup-console"
     chef.add_recipe "go-setup"

@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
-HEADLESS=true TO_RUN_WITH_WINDOW_MANAGER=true vagrant up
+export MEMORY=4096
+export TO_RUN_WITH_WINDOW_MANAGER=true
+
+HEADLESS=true vagrant up --provision
 vagrant halt
-TO_RUN_WITH_WINDOW_MANAGER=true vagrant up --no-provision
+HEADLESS=false vagrant up --no-provision
