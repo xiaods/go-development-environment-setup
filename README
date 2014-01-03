@@ -1,13 +1,56 @@
-Using this setup requires:
-1. Vagrant
-2. Virtual Box 4.3.4 or higher
+Go development environment setup
+================================
 
-This box sets up a precise64 bit virtual machine with 2GB RAM.
+These scripts will setup a virtual machine, with all the dependencies needed to build Go.
 
-To run this setup in the terminal mode (Without the UI):
-1. Windows - run the setup.bat file.
-2. Linux and Mac - run the setup.sh file.
+Dependencies
+------------
 
-To run this setup with GUI:
-1. Windows - run the setup.gui.bat file.
-2. Linux and Mac - run the setup.gui.sh file.
+1. Vagrant 1.4 or higher (http://www.vagrantup.com/)
+2. VirtualBox 4.3.4 or higher (https://www.virtualbox.org/)
+
+First time setup - Linux / Mac
+------------------------------
+
+To setup the development environment without a GUI window manager (Gnome) and an IDE, do this:
+./setup.sh
+
+OR
+
+To setup the development environment with a GUI window manager (Gnome) and an IDE, do this:
+./setup.gui.sh
+
+First time setup - Windows
+--------------------------
+
+To setup the development environment without a GUI window manager (Gnome) and an IDE, do this:
+./setup.bat
+
+OR
+
+To setup the development environment with a GUI window manager (Gnome) and an IDE, do this:
+./setup.gui.bat
+
+
+Subsequent runs
+---------------
+
+Running one of the above setup scripts should automatically log you into the virtual machine (using VirtualBox)
+environment and give you a shell (when run without a GUI) or an IDE (when run with GUI). Suppose you bring the virtual
+machine down and you want to bring it up at a later time, you can do this:
+vagrant up
+
+You can bring down the virtual machine, keeping all your work intact, by doing this:
+vagrant halt
+
+OR
+
+vagrant suspend
+
+
+More information
+----------------
+
+Credentials for the virtual machine are:
+  Username: vagrant
+  Password: vagrant
