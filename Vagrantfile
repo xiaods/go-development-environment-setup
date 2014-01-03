@@ -22,13 +22,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     vb.memory = memory_to_use
   end
 
+  config.vm.provision "shell", inline: "apt-get update"
+
   config.vm.provision :chef_solo do |chef|
     # chef.recipe_url = "https://raw.github.com/GoCD/go-dev-setup-cookbooks/master/cookbooks.tar.gz"
     chef.recipe_url = "https://dl.dropboxusercontent.com/s/enxlnnc8ynoebx7/cookbooks.tar.gz?dl=1&token_hash=AAHC0ghoz1-x7bLRO4cTTcBGuqd1MNhEmC9ps1jK7gvVwg"
     chef.cookbooks_path = [:vm, "go-dev-setup-cookbooks"]
     chef.verbose_logging = true
-
-    chef.add_recipe "apt-update"
 
     chef.add_recipe "zip"
 
