@@ -40,7 +40,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.network :forwarded_port, guest: 8153, host: 8153
   config.vm.network :forwarded_port, guest: 8154, host: 8154
-  config.vm.network :public_network
+
+  # Choose an interface to bridge your network
+  # config.vm.network :public_network
 
   # config.vm.synced_folder "../data", "/vagrant_data"
 
