@@ -44,8 +44,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Choose an interface to bridge your network
   # config.vm.network :public_network
 
-  # config.vm.synced_folder "../data", "/vagrant_data"
-
   config.vm.provider :virtualbox do |vb|
     vb.gui = env.read("HEADLESS") != "true"
     vb.memory = memory_to_use
@@ -62,7 +60,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     chef.add_recipe "zip"
 
     chef.add_recipe "git"
-    # chef.add_recipe "mercurial"
     chef.add_recipe "subversion"
 
     chef.add_recipe "java"
@@ -86,4 +83,22 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       }
     }
   end
+
+  $go_setup_script = <<SCRIPT
+  if [ -d "cruise" ]; then
+    echo "Go codebase seems to be checked out, already. Skipping it."
+    exit 0
+  fi
+
+  set -e
+
+  echo "Started checking out code from https://github.com/GoCD/gocd.tmp.git at: $(date)"
+  git clone --progress https://testusergo:e86bff136c29f4ade63610bd8634118ae0951a0c@github.com/GoCD/gocd.tmp.git cruise 2>&1
+  echo "Finished checking out code at: $(date)"
+  cd cruise
+  git submodule update --init --recursive
+  ./b clean prepare
+SCRIPT
+
+  config.vm.provision "shell", privileged: false, inline: $go_setup_script
 end
