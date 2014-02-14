@@ -101,7 +101,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   echo "Finished checking out code at: $(date)"
   cd cruise
   git submodule update --init --recursive
-  ./b clean prepare
+  ./b clean cruise:prepare
 SCRIPT
 
   config.vm.provision "shell", privileged: false, inline: $go_setup_script
