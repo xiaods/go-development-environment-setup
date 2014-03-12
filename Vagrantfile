@@ -53,6 +53,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     vb.memory = memory_to_use
   end
 
+  config.vm.synced_folder ".vagrant/go.code", "/home/vagrant/go/", create: true
+  config.vm.synced_folder ".vagrant/maven.repo", "/home/vagrant/.m2/", create: true
+
   config.vm.provision "shell", inline: "apt-get update"
 
   config.vm.provision :chef_solo do |chef|
@@ -89,19 +92,24 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   $go_setup_script = <<SCRIPT
-  if [ -d "cruise" ]; then
-    echo "Go codebase seems to be checked out, already. Skipping it."
-    exit 0
-  fi
-
   set -e
 
-  echo "Started checking out code from https://github.com/GoCD/gocd.tmp.git at: $(date)"
-  git clone --progress https://testusergo:e86bff136c29f4ade63610bd8634118ae0951a0c@github.com/GoCD/gocd.tmp.git cruise 2>&1
-  echo "Finished checking out code at: $(date)"
-  cd cruise
+  if [ -d "go/.git" ]; then
+    echo "Go codebase seems to be checked out, already. Updating it."
+    echo "It is currently at:"; (cd go; git log -n 1)
+
+    echo "Started updating code from https://github.com/GoCD/gocd.tmp.git at: $(date)"
+    (cd go; git pull) || echo "*** *** Unable to update Go code. Leaving it in current state." >&2
+    echo "Finished updating code at: $(date)."
+  else
+    echo "Started checking out code from https://github.com/GoCD/gocd.tmp.git at: $(date)"
+    git clone --progress https://testusergo:e86bff136c29f4ade63610bd8634118ae0951a0c@github.com/GoCD/gocd.tmp.git cruise 2>&1
+    echo "Finished checking out code at: $(date)."
+  fi
+
+  cd go
   git submodule update --init --recursive
-  ./b clean cruise:prepare
+  ./bn clean cruise:prepare
 SCRIPT
 
   config.vm.provision "shell", privileged: false, inline: $go_setup_script
