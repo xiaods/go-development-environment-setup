@@ -60,7 +60,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.provision :chef_solo do |chef|
     # chef.recipe_url = "https://raw.github.com/GoCD/go-dev-setup-cookbooks/master/cookbooks.tar.gz"
-    chef.recipe_url = "https://dl.dropboxusercontent.com/s/1603y8w2rj761z5/cookbooks.tar.gz?dl=1&token_hash=AAECnZiz3SV7IPrXcZJ82hj6e74gVH2bO_T1957Qaj_Jhw"
+    chef.recipe_url = "https://dl.dropboxusercontent.com/s/kyywsmr43bos6py/cookbooks.tar.gz?dl=1&token_hash=AAFlxdcxz3wXgekY65PqL9jBgCuPhlmDhgr6NhA41HLu6Q"
     chef.cookbooks_path = [:vm, "go-dev-setup-cookbooks"]
     chef.verbose_logging = true
 
@@ -77,7 +77,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     chef.add_recipe "rake"
 
     chef.add_recipe "intellij" if env.read("TO_RUN_WITH_WINDOW_MANAGER") == "true"
-    chef.add_recipe "gnome" if env.read("TO_RUN_WITH_WINDOW_MANAGER") == "true"
+    chef.add_recipe "openbox" if env.read("TO_RUN_WITH_WINDOW_MANAGER") == "true"
     chef.add_recipe "startup-setup" if env.read("TO_RUN_WITH_WINDOW_MANAGER") == "true"
 
     chef.add_recipe "startup-setup-console"
@@ -103,7 +103,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     echo "Finished updating code at: $(date)."
   else
     echo "Started checking out code from https://github.com/GoCD/gocd.tmp.git at: $(date)"
-    git clone --progress https://testusergo:e86bff136c29f4ade63610bd8634118ae0951a0c@github.com/GoCD/gocd.tmp.git cruise 2>&1
+    git clone --progress https://testusergo:e86bff136c29f4ade63610bd8634118ae0951a0c@github.com/GoCD/gocd.tmp.git go 2>&1
     echo "Finished checking out code at: $(date)."
   fi
 
