@@ -53,14 +53,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     vb.memory = memory_to_use
   end
 
-  config.vm.synced_folder ".vagrant/go.code", "/home/vagrant/go/", create: true
-  config.vm.synced_folder ".vagrant/maven.repo", "/home/vagrant/.m2/", create: true
+  # config.vm.synced_folder ".vagrant/go.code", "/home/vagrant/go/", create: true
+  # config.vm.synced_folder ".vagrant/maven.repo", "/home/vagrant/.m2/", create: true
 
   config.vm.provision "shell", inline: "apt-get update"
 
   config.vm.provision :chef_solo do |chef|
     # chef.recipe_url = "https://raw.github.com/GoCD/go-dev-setup-cookbooks/master/cookbooks.tar.gz"
-    chef.recipe_url = "https://dl.dropboxusercontent.com/s/hx04t2dhzde02ur/cookbooks.tar.gz?dl=1&token_hash=AAGsAX5mnLhUIiFI-sT7Z9j2HIFe-t-WJn9tH0w7aeakXw"
+    chef.recipe_url = "https://dl.dropboxusercontent.com/s/kheuzwpb0u2rv58/cookbooks.tar.gz?dl=1&token_hash=AAEb1MDsTdFwsfLprHIcqgf8dFvbtuX7EABqTDmAU-d-Og"
     chef.cookbooks_path = [:vm, "go-dev-setup-cookbooks"]
     chef.verbose_logging = true
 
@@ -77,7 +77,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     chef.add_recipe "rake"
 
     chef.add_recipe "intellij" if env.read("TO_RUN_WITH_WINDOW_MANAGER") == "true"
-    chef.add_recipe "openbox" if env.read("TO_RUN_WITH_WINDOW_MANAGER") == "true"
+    chef.add_recipe "gnome" if env.read("TO_RUN_WITH_WINDOW_MANAGER") == "true"
     chef.add_recipe "startup-setup" if env.read("TO_RUN_WITH_WINDOW_MANAGER") == "true"
 
     chef.add_recipe "startup-setup-console"
@@ -110,6 +110,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   cd go
   git submodule update --init --recursive
   ./bn clean cruise:prepare
+  ./bn clean
 SCRIPT
 
   config.vm.provision "shell", privileged: false, inline: $go_setup_script
