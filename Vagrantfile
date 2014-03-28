@@ -111,7 +111,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   cd go
   git submodule update --init --recursive
   ./bn clean cruise:prepare
-  ./bn clean
+  mvn clean
 SCRIPT
 
   config.vm.provision "shell", privileged: false, inline: $go_setup_script
