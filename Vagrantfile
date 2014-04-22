@@ -60,7 +60,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.provision :chef_solo do |chef|
     # chef.recipe_url = "https://raw.github.com/GoCD/go-dev-setup-cookbooks/master/cookbooks.tar.gz"
-    chef.recipe_url = "https://dl.dropboxusercontent.com/s/z29mfn2sr7lthtd/cookbooks.tar.gz?dl=1&token_hash=AAHS7iN-4r_XOfsbcfyndu70uCYzxl4PVBVLScWxy0i19g"
+    chef.recipe_url = "https://dl.dropboxusercontent.com/s/z7jd0b2bxiytxef/cookbooks.tar.gz?dl=1&token_hash=AAFXbdELgyjbBOQ7HqyPuPtcezBXVf5AWG8V4sk_wk49cw"
     chef.cookbooks_path = [:vm, "go-dev-setup-cookbooks"]
     chef.verbose_logging = true
 
