@@ -90,13 +90,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         'install_flavor' => 'openjdk',
         'jdk_version' => '7'
       },
-	'ruby' => {
-	    "languages" => {
-	      "ruby" => {
-		"default_version" => "1.9"
-	      }
-	    }
-	}
+      'ruby' => {
+        'languages' => {
+          'ruby' => {
+            'default_version' => '1.9'
+          }
+        }
+      }
     }
   end
 
