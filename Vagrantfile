@@ -112,7 +112,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     echo "Finished updating code at: $(date)."
   else
     echo "Started checking out code from https://github.com/GoCD/gocd.tmp.git at: $(date)"
-    git clone --progress https://testusergo:e86bff136c29f4ade63610bd8634118ae0951a0c@github.com/GoCD/gocd.tmp.git go 2>&1
+    git clone --progress https://github.com/gocd/gocd.git go 2>&1
     echo "Finished checking out code at: $(date)."
   fi
 
