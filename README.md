@@ -49,6 +49,17 @@ OR
 > vagrant suspend
 
 
+Creating a brand new instance
+-----------------------------
+
+You can get rid of an already existing box and create a brand new environment by doing:
+> vagrant destroy
+
+And then running one of the first time setup steps again. 
+
+> Note: The process of first time setup can take a really long time (a minimum of 40-60 minutes on a good connection).
+
+
 More information
 ----------------
 
