@@ -53,5 +53,7 @@ More information
 ----------------
 
 Credentials for the virtual machine are:
+
   Username: vagrant
-  Password: vagrant
+
+There is currently no password for this user. You can set the password using the comand `passwd` for user *vagrant*.
