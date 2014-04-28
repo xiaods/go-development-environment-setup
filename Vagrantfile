@@ -107,11 +107,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     echo "Go codebase seems to be checked out, already. Updating it."
     echo "It is currently at:"; (cd go; git log -n 1)
 
-    echo "Started updating code from https://github.com/GoCD/gocd.tmp.git at: $(date)"
+    echo "Started updating code from https://github.com/gocd/gocd.git at: $(date)"
     (cd go; git pull) || echo "*** *** Unable to update Go code. Leaving it in current state." >&2
     echo "Finished updating code at: $(date)."
   else
-    echo "Started checking out code from https://github.com/GoCD/gocd.tmp.git at: $(date)"
+    echo "Started checking out code from https://github.com/gocd/gocd.git at: $(date)"
     git clone --progress https://github.com/gocd/gocd.git go 2>&1
     echo "Finished checking out code at: $(date)."
   fi
