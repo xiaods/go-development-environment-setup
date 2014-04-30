@@ -57,6 +57,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # config.vm.synced_folder ".vagrant/maven.repo", "/home/vagrant/.m2/", create: true
 
   config.vm.provision "shell", inline: "apt-get update"
+  
+  config.vm.provision :shell, inline:
+    '# Quick fix to enable vbguest on VirtualBox 4.3.10
+    # See https://github.com/mitchellh/vagrant/issues/3341
+    if [ ! -e /usr/lib/VBoxGuestAdditions ]; then
+      sudo ln -s /opt/VBoxGuestAdditions-4.3.10/lib/VBoxGuestAdditions \
+ 	    /usr/lib/VBoxGuestAdditions || true
+    fi'
+ 
 
   config.vm.provision :chef_solo do |chef|
     # chef.recipe_url = "https://raw.github.com/GoCD/go-dev-setup-cookbooks/master/cookbooks.tar.gz"
